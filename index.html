@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專業履歷編輯器 Pro - Business Edition</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/all.css">
+</head>
+
+<body onload="initPage()">
+
+    <nav class="resume-nav p-3 mb-4 shadow no-print">
+        <div class="container d-flex justify-content-between align-items-center">
+            <img class="h-auto" src="images/kenconts_logo.png" alt="kenconts logo">
+            <h4 class="m-0 fw-bold"><i class="bi bi-briefcase-fill me-2"></i>專業人才履歷系統</h4>
+            <div>
+                <button type="button" class="btn btn-outline-light me-2 d-none d-md-inline-block"
+                    onclick="showPreview()">
+                    <i class="bi bi-eye me-1"></i> 即時預覽
+                </button>
+                <button type="button" class="btn btn-light text-primary fw-bold" onclick="saveData()">儲存發布</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 d-none d-lg-block no-print">
+                <div class="list-group shadow-sm border-0 sticky-top" style="top: 100px;">
+                    <a href="#base-info" class="list-group-item list-group-item-action border-0 p-3 active"><i
+                            class="bi bi-person me-2"></i> 基本資料</a>
+                    <a href="#target-job" class="list-group-item list-group-item-action border-0 p-3"><i
+                            class="bi bi-search me-2"></i> 求職條件</a>
+
+                    <a href="#edu-section" class="list-group-item list-group-item-action border-0 p-3"><i
+                            class="bi bi-mortarboard me-2"></i> 學歷背景</a>
+                    <a href="#work-section" class="list-group-item list-group-item-action border-0 p-3"><i
+                            class="bi bi-briefcase me-2"></i> 工作經歷</a>
+
+
+                    <a href="#skill-section" class="list-group-item list-group-item-action border-0 p-3"><i
+                            class="bi bi-tools me-2"></i> 專長技能</a>
+                    <a href="#skill-section" class="list-group-item list-group-item-action border-0 p-3"><i
+                            class="bi bi-globe-americas me-2"></i> 語文能力</a>
+                    <a href="#skill-section" class="list-group-item list-group-item-action border-0 p-3"><i
+                            class="bi bi-award me-2"></i> 專業證照</a>
+
+                    <a href="#bio-section" class="list-group-item list-group-item-action border-0 p-3"><i
+                            class="bi bi-translate me-2"></i> 中英文自傳</a>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <form id="resumeForm">
+                    <section id="base-info">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0"><i class="bi bi-person-vcard text-primary"></i>個人基本資訊</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-4">
+                                    <div class="col-md-3 text-center d-flex flex-column align-items-center">
+                                        <div class="photo-box mb-2">
+                                            <i class="bi bi-camera" style="font-size: 2rem;"></i>
+                                            <span class="small">上傳照片</span>
+                                        </div>
+                                        <small class="text-muted">建議直式 4:5</small>
+                                    </div>
+                                    <div class="col-md-9 row g-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label required">中文姓名</label>
+                                            <input type="text" class="form-control" id="info_ch_name"
+                                                placeholder="請輸入中文姓名">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label required">英文姓名</label>
+                                            <input type="text" class="form-control" id="info_en_name"
+                                                placeholder="請輸入英文姓名">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label required">手機號碼</label>
+                                            <input type="tel" class="form-control" placeholder="0912-345-678"
+                                                id="info_sellphone">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label required">Email</label>
+                                            <input type="email" class="form-control" id="info_email"
+                                                placeholder="example@mail.com">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label">性別</label>
+                                            <select class="form-select" id="info_gender">
+                                                <option value="" disabled hidden>性別</option>
+                                                <option value="男">男</option>
+                                                <option value="女">女</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">生日</label>
+                                            <input type="date" class="form-control" id="info_birthday">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">通訊地址</label>
+                                            <input type="text" class="form-control" placeholder="請輸入您的居住城市與行政區"
+                                                id="info_add">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- 求職條件 -->
+                    <section id="target-job">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0"><i class="bi bi-bullseye text-primary"></i>求職條件</h5>
+                            </div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label required">希望職稱</label>
+                                    <input type="text" class="form-control" id="job_title" placeholder="例：軟體工程師、行銷企劃">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">期待薪資</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" placeholder="40000" id="job_salary">
+                                        <span class="input-group-text">NTD</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">工作性質</label>
+                                    <select class="form-select" id="job_character">
+                                        <option value="" disabled hidden>工作性質</option>
+                                        <option value="全職">全職</option>
+                                        <option value="兼職/時薪">兼職/時薪</option>
+                                        <option value="專案/派遣">專案/派遣</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">希望工作地點</label>
+                                    <input type="text" class="form-control" id="job_place" placeholder="例：台北市、台中市">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">可上班日</label>
+                                    <select class="form-select" id="job_working_date">
+                                        <option value="" disabled hidden>可上班日</option>
+                                        <option value="立即上班">立即上班</option>
+                                        <option value="兩週內">兩週內</option>
+                                        <option value="一個月後">一個月後</option>
+                                        <option value="年後">年後</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- 學歷背景 -->
+                    <section id="edu-section">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0"><i class="bi bi-mortarboard text-primary"></i>學歷背景</h5>
+                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="addEducation()">+
+                                    新增學歷</button>
+                            </div>
+                            <div class="card-body" id="educationArea">
+                            </div>
+                        </div>
+                    </section>
+                    <!-- 工作經歷 -->
+                    <section id="work-section">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0"><i class="bi bi-briefcase text-primary"></i>工作經歷</h5>
+                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="addWork()">+
+                                    新增工作</button>
+                            </div>
+                            <div class="card-body" id="workArea">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 專長技能 (點擊按贊) -->
+                    <section id="skill-section">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0 text-center"><i class="bi bi-tools text-primary"></i>專長技能
+                                    (點擊按贊)</h5>
+                                <button type="button" class="btn btn-sm btn-outline-primary"
+                                    onclick="addSkillCategory()">+ 新增分類</button>
+                            </div>
+                            <div class="card-body" id="skillArea"></div>
+                        </div>
+                    </section>
+
+                    <!-- 語文能力 -->
+                    <section id="lang-section">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0 text-center"><i
+                                        class="bi bi-globe-americas text-primary"></i>語文能力</h5>
+                                <button type="button" class="btn btn-sm btn-outline-primary"
+                                    onclick="addLangCategory()">+ 新增分類</button>
+                            </div>
+                            <div class="card-body" id="langArea"></div>
+                        </div>
+                    </section>
+
+                    <!-- 專業證照 -->
+                    <section id="cer-section">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0 text-center"><i class="bi bi-award text-primary"></i>專業證照
+                                </h5>
+                                <button type="button" class="btn btn-sm btn-outline-primary"
+                                    onclick="addCertificationsCategory()">+ 新增分類</button>
+                            </div>
+                            <div class="card-body" id="certificationsArea"></div>
+                        </div>
+                    </section>
+
+                    <!-- 中英文自傳 -->
+                    <section id="bio-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0"><i class="bi bi-chat-left-text text-primary"></i>中英文自傳</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">中文自傳</label>
+                                    <textarea class="form-control" id="form_bio_zh" rows="5"
+                                        placeholder="請輸入中文自傳...">${cerDataList.chain}</textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold text-primary">English Autobiography</label>
+                                    <textarea class="form-control" id="form_bio_en" rows="5"
+                                        placeholder="Please enter your English autobiography...">${cerDataList.english}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="previewModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white no-print">
+                    <h5 class="modal-title">履歷預覽模式</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body bg-light">
+                    <div id="previewContent" class="preview-body shadow-sm mx-auto"></div>
+                </div>
+                <div class="modal-footer no-print">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">返回編輯</button>
+                    <button type="button" class="btn btn-primary" onclick="window.print()">
+                        <i class="bi bi-printer me-1"></i> 列印 / 儲存 PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/all.js"></script>
+</body>
+
+</html>

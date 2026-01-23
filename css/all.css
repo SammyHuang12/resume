@@ -1,0 +1,238 @@
+:root {
+    --brand-primary: #1a3a5f;
+    --brand-secondary: rgb(13, 110, 253);
+    --brand-accent: #f39c12;
+    --bg-body: #f4f7f9;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    background-color: var(--bg-body);
+    font-family: 'Noto Sans TC', sans-serif;
+    color: #334155;
+    scroll-behavior: smooth;
+}
+
+img {
+    width: 20%;
+}
+
+section {
+    scroll-margin-top: 95px;
+    /* ≈ nav 高度 */
+}
+
+/* 導航 (Desktop) */
+.resume-nav {
+    background: var(--brand-primary);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.list-group-item.active,
+.list-group-item:hover {
+    font-weight: bold;
+}
+
+/* 大頭照 */
+.photo-box {
+    width: 130px;
+    height: 160px;
+    background: #e9ecef;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.required::after {
+    content: " *";
+    color: red;
+}
+
+.photo-box:hover {
+    border-color: var(--brand-secondary);
+    color: var(--brand-secondary);
+}
+
+/* 卡片美化 */
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 2rem;
+}
+
+.card-header {
+    background-color: #fff !important;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 2px solid #f1f5f9;
+    border-radius: 16px 16px 0 0 !important;
+}
+
+.card-title {
+    font-weight: 700;
+    color: var(--brand-primary);
+    font-size: 1.25rem;
+}
+
+.card-title i {
+    /* color: var(--brand-orange); */
+    margin-right: 12px;
+}
+
+/* 技能評分系統 */
+.skill-group {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.star-rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: 5px;
+}
+
+.star-rating i {
+    font-size: 1.2rem;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* 點選效果 */
+.star-rating i:hover,
+.star-rating i:hover~i,
+.star-rating i.active,
+.star-rating i.active~i {
+    color: var(--brand-accent);
+}
+
+/* 預覽與列印樣式 */
+.preview-body {
+    background: white;
+    min-height: 297mm;
+    /* A4比例 */
+    padding: 50px;
+}
+
+.preview-label {
+    font-weight: bold;
+    color: var(--brand-primary);
+    border-left: 5px solid var(--brand-primary);
+    padding-left: 12px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    background: #f8fafc;
+}
+
+.item-row {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.item-row:hover {
+    border-color: var(--brand-secondary);
+    background: #fff;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #94a3b8;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    color: #ef4444;
+}
+
+@media print {
+
+    .no-print,
+    .modal-header,
+    .modal-footer,
+    .resume-nav,
+    .list-group {
+        display: none !important;
+    }
+
+    .modal-dialog {
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .modal-content {
+        border: none !important;
+    }
+
+    .preview-body {
+        padding: 0;
+        box-shadow: none !important;
+    }
+
+    body {
+        background: white;
+    }
+}
+
+
+/* 預覽模式下的專業外觀優化 */
+.resume-preview-wrapper {
+    background-color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+/* 進度條外觀自定義 */
+.progress {
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #1a3a5f 0%, #0d6efd 100%) !important;
+    transition: width 0.8s ease-in-out;
+}
+
+/* 工作經歷的時間軸效果 */
+.resume-preview-wrapper .position-relative::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 5px;
+    width: 9px;
+    height: 9px;
+    background-color: #0d6efd;
+    border-radius: 50%;
+}
+
+/* 強調文字層次 */
+.resume-preview-wrapper h5 {
+    letter-spacing: 1px;
+    color: #1a3a5f;
+    text-transform: uppercase;
+}
+
+/* 列印優化：隱藏不必要的背景與陰影 */
+@media print {
+    .progress-bar {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
