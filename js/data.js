@@ -120,7 +120,7 @@ window.cerDataList = [
     {
         name: 'RHCE',
         organization: 'REDHAT美國原廠',
-        level: '',
+        level: '專業級',
         date: '2005-07-01'
     }, {
         name: '電腦軟體應用',

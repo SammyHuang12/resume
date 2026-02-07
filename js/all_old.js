@@ -5,7 +5,6 @@ function initPage() {
         infoDataList.length > 0) {
 
         const info = infoDataList[0];
-        // document.getElementById('info_name').value = info.name || '';
         document.getElementById('info_ch_name').value = info.ch_name || '';
         document.getElementById('info_en_name').value = info.en_name || '';
         document.getElementById('info_sellphone').value = info.sellphone || '';
@@ -158,9 +157,9 @@ function addWork(data = null) {
                     <div class="col-md-4">
                         <label class="form-label">期間</label>
                         <div class="input-group">
-                            <input type="date" name="work_start[]" class="form-control" value="${start_date}">
+                            <input type="date" class="form-control" value="${start_date}">
                             <span class="input-group-text">至</span>
-                            <input type="date" name="work_end[]" class="form-control" value="${end_date}">
+                            <input type="date" class="form-control" value="${end_date}">
                         </div>
                     </div>
                     <div class="col-12">
@@ -182,7 +181,7 @@ function addSkillCategory(data = null) {
     const html = `
                 <div class="skill-group mb-4 item-row" id="${id}">
                     <div class="d-flex justify-content-between mb-3">
-                        <input type="text" class="form-control w-50 category-title" name="skill_title[]" value="${title}" placeholder="例：前端技術">                        
+                        <input type="text" class="form-control w-50 category-title" value="${title}" placeholder="例：前端技術">                        
                         <button type="button" class="btn btn-sm text-danger" onclick="removeItem(this)">移除分類</button>
                     </div>
                     <div class="skill-items">${skillsHtml}</div>
@@ -205,13 +204,13 @@ function createSkillItemHtml(name = '', level = 0) {
     return `
         <div class="row align-items-center mb-2 skill-item">
             <div class="col-6">
-                <input type="text" name="skill_name[]"
+                <input type="text"
                        class="form-control form-control-sm skill-name"
                        value="${name}">
             </div>
             <div class="col-5">
                 <div class="star-rating">${icons}</div>
-                <input type="hidden" class="skill-score" name="skill_score[]" value="${level}">
+                <input type="hidden" class="skill-score" value="${level}">
             </div>
             <div class="col-1 text-end">
                 <i class="bi bi-trash text-muted"
@@ -333,13 +332,14 @@ function createLicenseItemHtml(name = '', score = '') {
     return `
         <div class="row align-items-center mb-2 skill-item">
             <div class="col-6">
-                <input type="text" name="licenses_name[]"
+                <input type="text"
                        class="form-control form-control-sm skill-name"
                        placeholder="證照名稱"
                        value="${name}">
             </div>
             <div class="col-5">
-                <input type="text" name="licenses_score[]"
+               
+                <input type="text"
                        class="form-control form-control-sm skill-name"
                         placeholder="證照分數" value="${score}">
             </div>
@@ -367,20 +367,20 @@ function addCertificationsCategory(data = null) {
                 <div class="row g-3">
                     <div class="col-md-3">
                         <label class="form-label">證照名稱</label>
-                        <input type="text" name="cer_title[]" class="form-control" value="${name}" placeholder="例：網頁設計">
+                        <input type="text" name="cer_company[]" class="form-control" value="${name}" placeholder="例：網頁設計">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">機構</label>
-                        <input type="text" name="cer_company[]" class="form-control" value="${organization}" placeholder="例：勞動部技能檢定考試">
+                        <input type="text" name="cer_title[]" class="form-control" value="${organization}" placeholder="例：勞動部技能檢定考試">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">級別</label>
-                        <input type="text" name="cer_level[]" class="form-control" value="${level}" placeholder="例：甲級">
+                        <input type="text" name="cer_title[]" class="form-control" value="${level}" placeholder="例：甲級">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">取得⽇期</label>
                         <div class="input-group">
-                            <input type="date" name="cer_date[]" class="form-control" value="${date}">
+                            <input type="date" class="form-control" value="${date}">
                         </div>
                     </div>
                 </div>
@@ -398,7 +398,6 @@ function removeItem(btn) {
 function showPreview() {
     // 1. 取得基本資料 (從 Form 欄位抓取最新值)
     const info = {
-        // name: document.getElementById('info_name').value || '未填寫姓名',
         ch_name: document.getElementById('info_ch_name').value || '未填寫姓名',
         en_name: document.getElementById('info_en_name').value,
         title: document.getElementById('job_title').value || '資深軟體工程師',
@@ -459,7 +458,6 @@ function showPreview() {
         <div class="resume-preview-wrapper p-4" style="color: #2c3e50; line-height: 1.6;">
             <div class="row align-items-end mb-5 border-bottom pb-4">
                 <div class="col-md-7">
-                    <!-- <h1 class="display-5 fw-bold mb-1 text-dark">${info.name}</h1> -->
                     <h1 class="display-5 fw-bold mb-1 text-dark d-inline-block">${info.ch_name}</h1>&ensp;
                     <h4 class="text-muted d-inline-block">${info.en_name}</h4>
                     <h4 class="text-primary mb-3">${info.title}</h4>
@@ -580,273 +578,7 @@ function calculateDuration(start, end) {
 
     return result ? `(共 ${result})` : "";
 }
-/**
-* 一、API 送出主 function（你 navbar 的 saveData()）
-*/
+
 function saveData() {
-    const payload = collectResumeData();
-
-    console.log('送出履歷資料:', payload);
-
-    fetch('/api/resumes', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content
-        },
-        body: JSON.stringify(payload)
-    })
-        .then(res => {
-            if (!res.ok) throw res;
-            return res.json();
-        })
-        .then(data => {
-            alert('履歷已成功儲存！');
-            console.log('API response:', data);
-        })
-        .catch(async err => {
-            if (err.json) {
-                const errorData = await err.json();
-                console.error('API error:', errorData);
-                alert(errorData.message || '儲存失敗');
-            } else {
-                alert('系統錯誤，請稍後再試');
-            }
-        });
-}
-/**
-*二、核心：收集整份履歷資料（重點）
-*/
-function collectResumeData() {
-    return {
-        base_info: getBaseInfo(),
-        target_job: getTargetJob(),
-        educations: getEducations(),
-        works: getWorks(),
-        skills: getSkills(),
-        languages: getLanguages(),
-        certifications: getCertifications(),
-        biography: getBiography()
-    };
-}
-
-
-/**三、各區塊資料收集 function
-*1️⃣ 個人基本資料
-*/
-function getBaseInfo() {
-    return {
-        // name: document.getElementById('info_name')?.value || '',
-        ch_name: document.getElementById('info_ch_name')?.value || '',
-        en_name: document.getElementById('info_en_name')?.value || '',
-        phone: document.getElementById('info_sellphone')?.value || '',
-        email: document.getElementById('info_email')?.value || '',
-        gender: document.getElementById('info_gender')?.value || '',
-        birthday: document.getElementById('info_birthday')?.value || '',
-        address: document.getElementById('info_add')?.value || ''
-    };
-}
-
-/**
- * 2️⃣ 求職條件
-*/
-function getTargetJob() {
-    return {
-        title: document.getElementById('job_title')?.value || '',
-        salary: document.getElementById('job_salary')?.value || '',
-        character: document.getElementById('job_character')?.value || '',
-        place: document.getElementById('job_place')?.value || '',
-        available_date: document.getElementById('job_working_date')?.value || ''
-    };
-}
-/**
- * 3️⃣ 學歷背景（支援動態新增）
-假設你每一筆學歷都有 .education-item
-*/
-
-function getEducations() {
-    const list = [];
-
-    document.querySelectorAll('#educationArea .item-row').forEach(item => {
-        list.push({
-            school: item.querySelector('[name="edu_school[]"]')?.value || '',
-            major: item.querySelector('[name="edu_major[]"]')?.value || '',
-            degree: item.querySelector('[name="edu_degree[]"]')?.value || '',
-            start_date: item.querySelector('input[type="month"]:nth-of-type(1)')?.value || '',
-            end_date: item.querySelector('input[type="month"]:nth-of-type(2)')?.value || ''
-        });
-    });
-
-    return list;
-}
-
-/**
- * 4️⃣ 工作經歷
-*/
-function getWorks() {
-    const list = [];
-
-    document.querySelectorAll('#workArea .item-row').forEach(item => {
-        list.push({
-            company: item.querySelector('[name="work_company[]"]')?.value || '',
-            title: item.querySelector('[name="work_title[]"]')?.value || '',
-            start: item.querySelector('[name="work_start[]"]')?.value || '',
-            end: item.querySelector('[name="work_end[]"]')?.value || '',
-            description: item.querySelector('[name="work_content[]"]')?.value || ''
-        });
-    });
-
-    return list;
-}
-
-/**
- *5️⃣ 專長技能（分類 + 點擊）
-*/
-function getSkills() {
-    const categories = [];
-
-    document.querySelectorAll('#skillArea .skill-group').forEach(group => {
-        const categoryTitle =
-            group.querySelector('.category-title')?.value.trim() || '';
-
-        if (categoryTitle === '') return;
-
-        const items = [];
-
-        group.querySelectorAll('.skill-item').forEach(item => {
-            const name =
-                item.querySelector('.skill-name')?.value.trim() || '';
-
-            const level = parseInt(
-                item.querySelector('.skill-score')?.value || 0,
-                10
-            );
-
-            if (name !== '') {
-                items.push({
-                    name: name,
-                    level: level
-                });
-            }
-        });
-
-        categories.push({
-            category: categoryTitle,
-            items: items
-        });
-    });
-
-    return categories;
-}
-
-
-
-function getSkills_1() {
-    const categories = [];
-
-    document.querySelectorAll('#skillArea .item-row').forEach(cat => {
-        const skills = [];
-
-        cat.querySelectorAll('.skill-item.active').forEach(skill => {
-            skills.push(skill.dataset.value);
-        });
-
-        categories.push({
-            category: cat.dataset.category,
-            items: skills
-        });
-    });
-
-    return categories;
-}
-
-/**
- * 6️⃣ 語文能力
-*/
-function getLanguages() {
-    const list = [];
-
-    document.querySelectorAll('#langArea .item-row').forEach(item => {
-
-        // ① 收集證照
-        const licenses = [];
-        item.querySelectorAll('.lang-license .skill-item').forEach(skill => {
-            const name = skill.querySelectorAll('input')[0]?.value || '';
-            const score = skill.querySelectorAll('input')[1]?.value || '';
-
-            // 避免空白證照送出
-            if (name !== '') {
-                licenses.push({
-                    name: name,
-                    score: score
-                });
-            }
-        });
-
-        // ② 收集語言主資料
-        list.push({
-            lang_cat: item.querySelector('[name="lang_cat[]"]')?.value || '',
-            listen: item.querySelector('[name="lang_degree_listen[]"]')?.value || '',
-            speak: item.querySelector('[name="lang_degree_speak[]"]')?.value || '',
-            read: item.querySelector('[name="lang_degree_read[]"]')?.value || '',
-            write: item.querySelector('[name="lang_degree_write[]"]')?.value || '',
-            licenses: licenses
-        });
-    });
-
-    return list;
-}
-
-function getLanguages_1() {
-    const list = [];
-
-    document.querySelectorAll('#langArea .item-row').forEach(item => {
-        // document.querySelectorAll('#langArea .lang-item').forEach(item => {
-        list.push({
-            language: item.querySelector('[name="lang_cat[]"]')?.value || '',
-            listen: item.querySelector('[name="lang_degree_listen[]"]')?.value || '',
-            speak: item.querySelector('[name="lang_degree_speak[]"]')?.value || '',
-            read: item.querySelector('[name="lang_degree_read[]"]')?.value || '',
-            write: item.querySelector('[name="lang_degree_write[]"]')?.value || '',
-            licenses_: item.querySelector('[name="level"]')?.value || ''
-        });
-    });
-
-    return list;
-}
-
-/**
-*7️⃣ 專業證照
-*/
-function getCertifications() {
-    const list = [];
-
-    document.querySelectorAll('#certificationsArea .item-row').forEach(item => {
-        list.push({
-            title: item.querySelector('[name="cer_title[]"]')?.value || '',
-            company: item.querySelector('[name="cer_company[]"]')?.value || '',
-            level: item.querySelector('[name="cer_level[]"]')?.value || '',
-            period: item.querySelector('[name="cer_date[]"]')?.value || '',
-        });
-    });
-
-    return list;
-}
-
-/**
- * 8️⃣ 中英文自傳
-*/
-function getBiography() {
-    return {
-        zh: document.getElementById('form_bio_zh')?.value || '',
-        en: document.getElementById('form_bio_en')?.value || ''
-    };
-}
-
-
-
-
-
-function saveData_1() {
     alert('履歷資料已儲存（此為演示環境，您可以結合資料庫 API 使用）');
 }
