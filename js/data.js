@@ -3,7 +3,7 @@ window.infoDataList = [
     {
         ch_name: '陳小光',
         en_name: 'Henry Chen',
-        sellphone: '0955-111-222',
+        cellphone: '0955-111-222',
         email: 'email@gmail.com',
         gender: '男',
         birthday: '1972-03-28',

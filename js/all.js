@@ -8,7 +8,7 @@ function initPage() {
         // document.getElementById('info_name').value = info.name || '';
         document.getElementById('info_ch_name').value = info.ch_name || '';
         document.getElementById('info_en_name').value = info.en_name || '';
-        document.getElementById('info_sellphone').value = info.sellphone || '';
+        document.getElementById('info_cellphone').value = info.sellphone || '';
         document.getElementById('info_email').value = info.email || '';
         document.getElementById('info_gender').value = info.gender || '';
         document.getElementById('info_birthday').value = info.birthday || '';
@@ -402,7 +402,7 @@ function showPreview() {
         ch_name: document.getElementById('info_ch_name').value || '未填寫姓名',
         en_name: document.getElementById('info_en_name').value,
         title: document.getElementById('job_title').value || '資深軟體工程師',
-        phone: document.getElementById('info_sellphone').value,
+        phone: document.getElementById('info_cellphone').value,
         email: document.getElementById('info_email').value,
         address: document.getElementById('info_add').value,
         salary: document.getElementById('job_salary').value,
@@ -456,7 +456,7 @@ function showPreview() {
 
     // 6. 構建專業版 HTML 結構
     const previewHTML = `
-        <div class="resume-preview-wrapper p-4" style="color: #2c3e50; line-height: 1.6;">
+        <div id="resume-preview" class="resume-preview-wrapper p-4" style="color: #2c3e50; line-height: 1.6;">
             <div class="row align-items-end mb-5 border-bottom pb-4">
                 <div class="col-md-7">
                     <!-- <h1 class="display-5 fw-bold mb-1 text-dark">${info.name}</h1> -->
@@ -639,7 +639,7 @@ function getBaseInfo() {
         // name: document.getElementById('info_name')?.value || '',
         ch_name: document.getElementById('info_ch_name')?.value || '',
         en_name: document.getElementById('info_en_name')?.value || '',
-        phone: document.getElementById('info_sellphone')?.value || '',
+        phone: document.getElementById('info_cellphone')?.value || '',
         email: document.getElementById('info_email')?.value || '',
         gender: document.getElementById('info_gender')?.value || '',
         birthday: document.getElementById('info_birthday')?.value || '',
