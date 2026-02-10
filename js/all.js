@@ -434,8 +434,6 @@ function showPreview() {
         };
     });
 
-
-
     // 4. 處理技能 (關鍵：評分長條圖)
     const skillCategories = Array.from(document.querySelectorAll('#skillArea .skill-group')).map(group => {
         const catTitle = group.querySelector('.category-title').value;
@@ -450,11 +448,52 @@ function showPreview() {
         return { catTitle, skills };
     });
 
-    // 5. 處理語言與證照 (簡化呈現)
+    // 5. 處理語言
+    const langItems = Array.from(document.querySelectorAll('#langArea .item-row')).map(row => {
+
+        const catValue = row.querySelector('[name="lang_cat[]"]').value.trim().toLowerCase();
+
+        const catMap = { e: '英文', j: '日文', c: '中文' };
+
+        const cat = catMap[catValue] || '';
+        const langDegree = {
+            listen: row.querySelector('[name="lang_degree_listen[]"]').value.trim(),
+            speak: row.querySelector('[name="lang_degree_speak[]"]').value.trim(),
+            read: row.querySelector('[name="lang_degree_read[]"]').value.trim(),
+            write: row.querySelector('[name="lang_degree_write[]"]').value.trim()
+        };
+
+        const degreeHtml = Object.entries(langDegree)
+            .filter(([key, val]) => val.trim() !== '') // 只留下有值的欄位
+            .map(([key, val]) => {
+                const keyMap = { listen: '聽', speak: '說', read: '讀', write: '寫' };
+                return `${keyMap[key]}-${val}`;
+            })
+            .join(' | ');
+
+        const licenses = Array.from(row.querySelectorAll('.skill-item')).map(item => {
+            const scoreInput = item.querySelector('[name="licenses_score[]"]').value.trim();
+
+            return {
+                title: item.querySelector('[name="licenses_name[]"]').value,
+                score: scoreInput ? ` - ${scoreInput}分` : ''
+            };
+        }).filter(l => l.title);
+        return { cat, langDegree, licenses, degreeHtml };
+    });
+
+    // 6. 證照
+    const cerItems = Array.from(document.querySelectorAll('#certificationsArea .item-row')).map(row => ({
+        title: row.querySelector('[name="cer_title[]"]').value,
+        level: row.querySelector('[name="cer_level[]"]').value,
+    }));
+
+
+    // 7. 關於我
     const bioZh = document.getElementById('form_bio_zh').value.replace(/\n/g, '<br>');
     const bioEn = document.getElementById('form_bio_en').value.replace(/\n/g, '<br>');
 
-    // 6. 構建專業版 HTML 結構
+    // 8. 構建專業版 HTML 結構
     const previewHTML = `
         <div id="resume-preview" class="resume-preview-wrapper p-4" style="color: #2c3e50; line-height: 1.6;">
             <div class="row align-items-end mb-5 border-bottom pb-4">
@@ -488,6 +527,24 @@ function showPreview() {
                         `).join('')}
                     </div>
                     <div class="mb-4">
+                        <h5 class="fw-bold border-start border-primary border-4 ps-2 mb-3">語文能力</h5>
+                        ${langItems.map(lang => `
+                            <div class="mb-3">
+                                ${lang.cat ? `<div class="fw-bold small">${lang.cat}</div>` : ''}
+                                ${lang.licenses.map(lic => `<div class="fw-bold small">
+                                    ${lic.title}<span class="small text-muted">${lic.score}</span></div>
+                                `).join('')}
+                                ${lang.degreeHtml ? `<div class="small text-muted">${lang.degreeHtml}</div>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="fw-bold border-start border-primary border-4 ps-2 mb-3">專業證照</h5>
+                        ${cerItems.map(cer => `
+                            <div class="fw-bold small">${cer.title} - <span class="small text-muted">${cer.level}</span></div>                         
+                        `).join('')}
+                    </div>   
+                    <div class="mb-4">
                         <h5 class="fw-bold border-start border-primary border-4 ps-2 mb-3">專業技能</h5>
                         ${skillCategories.map(cat => `
                             <div class="mb-3">
@@ -504,7 +561,7 @@ function showPreview() {
                                 `).join('')}
                             </div>
                         `).join('')}
-                    </div>                    
+                    </div>                     
                 </div>
 
                 <div class="col-md-8 ps-md-4">
@@ -539,7 +596,7 @@ function showPreview() {
         </div>
     `;
 
-    // 7. 注入 HTML 並顯示 Modal
+    // 8. 注入 HTML 並顯示 Modal
     document.getElementById('previewContent').innerHTML = previewHTML;
     const previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
     previewModal.show();
