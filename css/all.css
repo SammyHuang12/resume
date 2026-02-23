@@ -122,7 +122,7 @@ section {
     background: white;
     min-height: 297mm;
     /* A4比例 */
-    padding: 50px;
+    padding: 20mm;
 }
 
 .preview-label {
@@ -162,33 +162,14 @@ section {
     color: #ef4444;
 }
 
-@media print {
+.preview-body img {
+    width: auto;
+    max-width: 120px;
+}
 
-    .no-print,
-    .modal-header,
-    .modal-footer,
-    .resume-nav,
-    .list-group {
-        display: none !important;
-    }
-
-    .modal-dialog {
-        max-width: 100% !important;
-        margin: 0 !important;
-    }
-
-    .modal-content {
-        border: none !important;
-    }
-
-    .preview-body {
-        padding: 0;
-        box-shadow: none !important;
-    }
-
-    body {
-        background: white;
-    }
+.progress,
+.mb-2 {
+    page-break-inside: avoid;
 }
 
 
@@ -196,6 +177,7 @@ section {
 .resume-preview-wrapper {
     background-color: #fff;
     font-family: 'Noto Sans TC', sans-serif;
+    padding: 18mm;
 }
 
 /* 進度條外觀自定義 */
@@ -230,35 +212,111 @@ section {
 }
 
 /* 列印優化：隱藏不必要的背景與陰影 */
+/* ================= PRINT ================= */
+
 @media print {
+
+    /* 隱藏 UI */
+    nav,
+    .resume-nav,
+    .no-print,
+    .list-group,
+    .modal-header,
+    .modal-footer {
+        display: none;
+    }
+
+    /* 背景 */
+    body {
+        background: white;
+    }
+
+    /* 只顯示履歷 */
+    body>*:not(.modal) {
+        display: none;
+    }
+
+    /* 解除 Bootstrap modal 限制 */
+    .modal {
+        position: absolute;
+        inset: 0;
+        display: block;
+        overflow: visible;
+    }
+
+    .modal-dialog {
+        max-width: none;
+        width: 100%;
+        margin: 0;
+        transform: none;
+    }
+
+    .modal-content {
+        border: none;
+        box-shadow: none;
+    }
+
+    .modal-body {
+        padding: 0;
+        overflow: visible;
+    }
+
+    /* 履歷紙張 */
+    #previewContent {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        padding: 0;
+        background: white;
+    }
+
+    /* 避免被切頁 */
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    li,
+    .card,
+    .item-row,
+    .resume-section,
+    .section {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin-bottom: 20px;
+    }
+
+    /* 技能條顏色 */
     .progress-bar {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
 
-    /* 1️⃣ 先全部隱藏 */
-    body * {
-        visibility: hidden;
-    }
-
-    /* 2️⃣ 只顯示履歷預覽模式 */
-    #resume-preview,
-    #resume-preview * {
-        visibility: visible;
-    }
-
-    /* 3️⃣ 把履歷拉到頁面左上角 */
-    #resume-preview {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        width: 100%;
-    }
-
-    /* 4️⃣ 列印用紙張設定（可選） */
+    /* A4 */
     @page {
         size: A4 portrait;
-        margin-top: 3cm;
-        margin: 1.5cm;
+        margin: 20mm;
     }
+
+}
+
+/* 內容內距 */
+.resume-preview-wrapper {
+    padding: 18mm;
+}
+
+/* ===== 區塊避免被切開 ===== */
+.resume-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+/* 工作經歷單一項 */
+.position-relative {
+    break-inside: avoid;
+}
+
+/* 技能 */
+.progress {
+    break-inside: avoid;
 }

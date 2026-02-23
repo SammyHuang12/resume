@@ -516,7 +516,7 @@ function showPreview() {
 
             <div class="row">
                 <div class="col-md-4 border-end">
-                    <div class="mb-4">
+                    <section class="resume-section mb-4">
                         <h5 class="fw-bold border-start border-primary border-4 ps-2 mb-3">教育程度</h5>
                         ${eduItems.map(edu => `
                             <div class="mb-3">
@@ -525,8 +525,8 @@ function showPreview() {
                                 <div class="text-muted" style="font-size: 0.75rem;">${edu.period}</div>
                             </div>
                         `).join('')}
-                    </div>
-                    <div class="mb-4">
+                    </section>
+                    <section class="resume-section mb-4">
                         <h5 class="fw-bold border-start border-primary border-4 ps-2 mb-3">語文能力</h5>
                         ${langItems.map(lang => `
                             <div class="mb-3">
@@ -537,14 +537,14 @@ function showPreview() {
                                 ${lang.degreeHtml ? `<div class="small text-muted">${lang.degreeHtml}</div>` : ''}
                             </div>
                         `).join('')}
-                    </div>
-                    <div class="mb-4">
+                    </section>
+                    <section class="resume-section mb-4">
                         <h5 class="fw-bold border-start border-primary border-4 ps-2 mb-3">專業證照</h5>
                         ${cerItems.map(cer => `
                             <div class="fw-bold small">${cer.title} - <span class="small text-muted">${cer.level}</span></div>                         
                         `).join('')}
-                    </div>   
-                    <div class="mb-4">
+                    </section>   
+                    <section class="resume-section mb-4">
                         <h5 class="fw-bold border-start border-primary border-4 ps-2 mb-3">專業技能</h5>
                         ${skillCategories.map(cat => `
                             <div class="mb-3">
@@ -561,11 +561,11 @@ function showPreview() {
                                 `).join('')}
                             </div>
                         `).join('')}
-                    </div>                     
+                    </section>                     
                 </div>
 
                 <div class="col-md-8 ps-md-4">
-                    <div class="mb-5">
+                    <section class="resume-section mb-5">
                         <h5 class="fw-bold border-start border-primary border-4 ps-2 mb-4">工作經歷</h5>
                         ${workItems.map(work => `
                             <div class="mb-4 position-relative ps-3" style="border-left: 1px solid #dee2e6;">
@@ -580,9 +580,9 @@ function showPreview() {
                                 <p class="text-muted small">${work.content}</p>
                             </div>
                         `).join('')}
-                    </div>
+                    </section>
 
-                    <div class="mb-4">
+                    <section class="resume-section mb-4">
                         <h5 class="fw-bold border-start border-primary border-4 ps-2 mb-3">關於我 (Summary)</h5>
                         <div class="p-3 bg-light rounded small text-dark mb-3">
                             ${bioZh}
@@ -590,7 +590,7 @@ function showPreview() {
                         <div class="p-3 bg-light rounded small text-secondary fst-italic">
                             ${bioEn}
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
         </div>
