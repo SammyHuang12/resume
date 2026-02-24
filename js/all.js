@@ -8,7 +8,7 @@ function initPage() {
         // document.getElementById('info_name').value = info.name || '';
         document.getElementById('info_ch_name').value = info.ch_name || '';
         document.getElementById('info_en_name').value = info.en_name || '';
-        document.getElementById('info_cellphone').value = info.sellphone || '';
+        document.getElementById('info_cellphone').value = info.cellphone || '';
         document.getElementById('info_email').value = info.email || '';
         document.getElementById('info_gender').value = info.gender || '';
         document.getElementById('info_birthday').value = info.birthday || '';
@@ -88,6 +88,32 @@ function initPage() {
 
     }
 };
+
+/* 上傳照片 */
+const photoBox = document.getElementById("photoBox");
+const photoInput = document.getElementById("photoInput");
+const preview = document.getElementById("photoPreview");
+const placeholder = document.getElementById("photoPlaceholder");
+
+photoBox.addEventListener("click", () => {
+    photoInput.click();
+});
+
+photoInput.addEventListener("change", function () {
+
+    const file = this.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        preview.src = e.target.result;
+        preview.style.display = "block";
+        placeholder.classList.add("d-none");
+    };
+
+    reader.readAsDataURL(file);
+});
 
 /* 學歷背景 */
 function addEducation(data = null) {
@@ -396,6 +422,9 @@ function removeItem(btn) {
 
 /* 即時預覽：專業資深版 */
 function showPreview() {
+    // 0.取照片資料
+    const photoSrc = document.getElementById("photoPreview").src;
+
     // 1. 取得基本資料 (從 Form 欄位抓取最新值)
     const info = {
         // name: document.getElementById('info_name').value || '未填寫姓名',
@@ -496,8 +525,9 @@ function showPreview() {
     // 8. 構建專業版 HTML 結構
     const previewHTML = `
         <div id="resume-preview" class="resume-preview-wrapper p-4" style="color: #2c3e50; line-height: 1.6;">
-            <div class="row align-items-end mb-5 border-bottom pb-4">
-                <div class="col-md-7">
+            <div class="row align-items-end mb-5 border-bottom pb-4">                
+                    ${photoSrc ? `<div class="col-md-2 text-center mb-2"><img src="${photoSrc}" 
+                    class="resume-photo"></div><div class="col-md-5">` : '<div class="col-md-7">'}                                    
                     <!-- <h1 class="display-5 fw-bold mb-1 text-dark">${info.name}</h1> -->
                     <h1 class="display-5 fw-bold mb-1 text-dark d-inline-block">${info.ch_name}</h1>&ensp;
                     <h4 class="text-muted d-inline-block">${info.en_name}</h4>

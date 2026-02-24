@@ -44,12 +44,23 @@ section {
     border: 2px dashed #ccc;
     border-radius: 8px;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: 0.3s;
+    overflow: hidden;
 }
+
+.resume-photo {
+    width: 120px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+
 
 .required::after {
     content: " *";

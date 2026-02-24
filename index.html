@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>專業履歷編輯器 Pro - Business Edition</title>
+    <title>專業人才履歷系統 Pro - Business Resume</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -64,12 +64,25 @@
                             </div>
                             <div class="card-body">
                                 <div class="row g-4">
-                                    <div class="col-md-3 text-center d-flex flex-column align-items-center">
+                                    <div
+                                        class="col-md-3 text-center d-flex flex-column align-items-center justify-content-center">
+                                        <!-- 
                                         <div class="photo-box mb-2">
                                             <i class="bi bi-camera" style="font-size: 2rem;"></i>
                                             <span class="small">上傳照片</span>
                                         </div>
+                                        -->
+                                        <!-- 上傳照片 -->
+                                        <div class="photo-box mb-2" id="photoBox">
+                                            <img id="photoPreview"
+                                                style="width:100%; height:100%; object-fit:cover; display:none;">
+                                            <div id="photoPlaceholder" class="d-flex flex-column">
+                                                <i class="bi bi-camera" style="font-size: 2rem;"></i>
+                                                <span class="small">上傳照片</span>
+                                            </div>
+                                        </div>
                                         <small class="text-muted">建議直式 4:5</small>
+                                        <input type="file" id="photoInput" accept="image/*" style="display:none">
                                     </div>
                                     <div class="col-md-9 row g-3">
                                         <div class="col-md-4">
