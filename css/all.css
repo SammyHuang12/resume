@@ -221,6 +221,10 @@ section {
 /* ================= PRINT ================= */
 
 @media print {
+    html {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
 
     /* 隱藏 UI */
     nav,
@@ -345,7 +349,7 @@ section {
     break-inside: avoid;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 992px) {
     .preview-body {
         padding: 50px;
     }
