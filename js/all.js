@@ -525,20 +525,23 @@ function showPreview() {
     // 8. 構建專業版 HTML 結構
     const previewHTML = `
         <div id="resume-preview" class="resume-preview-wrapper p-4" style="color: #2c3e50; line-height: 1.6;">
-            <div class="row align-items-end mb-5 border-bottom pb-4">                
-                    ${photoSrc ? `<div class="col-md-2 text-center mb-2"><img src="${photoSrc}" 
-                    class="resume-photo"></div><div class="col-md-5">` : '<div class="col-md-7">'}                                    
+            <div class="row align-items-stard mb-5 border-bottom pb-4">                
+            ${photoSrc ? `
+                <div class="col-md-2 text-center mb-2">
+                    <img src="${photoSrc}" class="resume-photo img-fluid">
+                </div>
+                <div class="col-md-5">` : '<div class="col-md-7">'}                                    
                     <!-- <h1 class="display-5 fw-bold mb-1 text-dark">${info.name}</h1> -->
                     <h1 class="display-5 fw-bold mb-1 text-dark d-inline-block">${info.ch_name}</h1>&ensp;
                     <h4 class="text-muted d-inline-block">${info.en_name}</h4>
                     <h4 class="text-primary mb-3">${info.title}</h4>
-                    <div class="d-flex flex-wrap gap-3 text-muted">
+                    <div class="d-flex flex-wrap gap-2 text-muted">
                         <span><i class="bi bi-envelope-fill me-1"></i>${info.email}</span>
                         <span><i class="bi bi-telephone-fill me-1"></i>${info.phone}</span>
-                        <span><i class="bi bi-geo-alt-fill me-1"></i>${info.address}</span>
+                        <span class="w-100"><i class="bi bi-geo-alt-fill me-1"></i>${info.address}</span>
                     </div>
                 </div>
-                <div class="col-md-5 text-md-end text-muted mt-3 mt-md-0">
+                <div class="col-md-5 text-md-end text-muted mt-3 mt-md-0 d-flex flex-column justify-content-end">
                     <p class="mb-0 small text-uppercase">期待薪資：${info.salary} NTD</p>
                     <p class="mb-0 small text-uppercase">工作地點：${info.place}</p>
                 </div>

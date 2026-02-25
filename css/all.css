@@ -53,10 +53,10 @@ section {
 }
 
 .resume-photo {
-    width: 120px;
+    width: 150px;
     height: 150px;
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 50%;
     border: 1px solid #ddd;
 }
 
@@ -133,7 +133,7 @@ section {
     background: white;
     min-height: 297mm;
     /* A4比例 */
-    padding: 20mm;
+    /* padding: 20mm; */
 }
 
 .preview-label {
@@ -171,11 +171,6 @@ section {
 
 .remove-btn:hover {
     color: #ef4444;
-}
-
-.preview-body img {
-    width: auto;
-    max-width: 120px;
 }
 
 .progress,
@@ -330,4 +325,10 @@ section {
 /* 技能 */
 .progress {
     break-inside: avoid;
+}
+
+@media (min-width: 576px) {
+    .preview-body {
+        padding: 50px;
+    }
 }
