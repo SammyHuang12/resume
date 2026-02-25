@@ -292,6 +292,24 @@ section {
         margin-bottom: 20px;
     }
 
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .resume-photo {
+        page-break-inside: avoid;
+        /* 指定列印時圓形圖片是正方形 */
+        width: 110px !important;
+        height: 110px !important;
+
+        /* 確保圖片保持圓形 */
+        border-radius: 50% !important;
+
+        /* 避免 object-fit 因印刷縮放被覆蓋 */
+        object-fit: cover !important;
+    }
+
     /* 技能條顏色 */
     .progress-bar {
         -webkit-print-color-adjust: exact;
